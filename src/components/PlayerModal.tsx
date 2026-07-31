@@ -64,6 +64,28 @@ export const PlayerModal: React.FC<PlayerModalProps> = ({
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(item.title ? 7200 : 2700);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+      });
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+  };
 
   // Invisible Click-Shield state to intercept initial ad/redirect overlays
   const [shieldActive, setShieldActive] = useState<boolean>(true);
@@ -475,6 +497,16 @@ export const PlayerModal: React.FC<PlayerModalProps> = ({
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4 pointer-events-auto">
+            {selectedServer.id === 'videasy' && (
+              <button
+                onClick={toggleFullscreen}
+                className="flex items-center justify-center bg-zinc-900/95 border border-white/20 hover:border-white text-white w-9 h-9 sm:w-10 sm:h-10 rounded-xl shadow-xl transition-all"
+                title="Toggle Fullscreen"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 sm:w-5 sm:h-5 text-white" viewBox="0 0 448 512"><path fill="currentColor" d="M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z"></path></svg>
+              </button>
+            )}
+
             <button
               onClick={handleRestart}
               className="flex items-center gap-2 bg-zinc-900/95 border border-white/20 hover:border-white text-white px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xl transition-all"
