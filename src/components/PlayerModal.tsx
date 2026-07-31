@@ -5,8 +5,6 @@ import {
   Check,
   ChevronDown,
   RotateCcw,
-  Maximize,
-  Minimize,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { MediaItem, MediaType, ServerOption } from "../types";
@@ -66,28 +64,6 @@ export const PlayerModal: React.FC<PlayerModalProps> = ({
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(item.title ? 7200 : 2700);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
-
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
-    };
-
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
-    return () => document.removeEventListener("fullscreenchange", handleFullscreenChange);
-  }, []);
-
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch((err) => {
-        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
-      });
-    } else {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      }
-    }
-  };
 
   // Invisible Click-Shield state to intercept initial ad/redirect overlays
   const [shieldActive, setShieldActive] = useState<boolean>(true);
@@ -499,24 +475,6 @@ export const PlayerModal: React.FC<PlayerModalProps> = ({
           </div>
 
           <div className="flex items-center gap-2 sm:gap-4 pointer-events-auto">
-            <button
-              onClick={toggleFullscreen}
-              className="flex items-center gap-2 bg-zinc-900/95 border border-white/20 hover:border-white text-white px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xl transition-all"
-              title="Toggle Fullscreen"
-            >
-              {isFullscreen ? (
-                <>
-                  <Minimize className="w-4 h-4 text-white" />
-                  <span className="hidden sm:inline">Exit Fullscreen</span>
-                </>
-              ) : (
-                <>
-                  <Maximize className="w-4 h-4 text-white" />
-                  <span className="hidden sm:inline">Fullscreen</span>
-                </>
-              )}
-            </button>
-
             <button
               onClick={handleRestart}
               className="flex items-center gap-2 bg-zinc-900/95 border border-white/20 hover:border-white text-white px-4 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-bold shadow-xl transition-all"
