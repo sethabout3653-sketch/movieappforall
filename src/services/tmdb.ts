@@ -205,8 +205,8 @@ export const STREAM_SERVERS: ServerOption[] = [
     supportsTv: true,
     getUrl: (id, type, s = 1, e = 1) =>
       type === 'movie'
-        ? `https://vidsrc.to/embed/movie/${id}`
-        : `https://vidsrc.to/embed/tv/${id}/${s}/${e}`,
+        ? `https://vidsrc.pm/embed/movie?tmdb=${id}`
+        : `https://vidsrc.pm/embed/tv?tmdb=${id}&season=${s}&episode=${e}`,
   },
   {
     id: 'xps',
@@ -253,8 +253,8 @@ export const STREAM_SERVERS: ServerOption[] = [
     supportsTv: true,
     getUrl: (id, type, s = 1, e = 1) =>
       type === 'movie'
-        ? `https://vidsrc.pm/embed/movie?tmdb=${id}`
-        : `https://vidsrc.pm/embed/tv?tmdb=${id}&season=${s}&episode=${e}`,
+        ? `https://vidsrc.to/embed/movie/${id}`
+        : `https://vidsrc.to/embed/tv/${id}/${s}/${e}`,
   },
   {
     id: 'videasy',
