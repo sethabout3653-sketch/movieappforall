@@ -602,7 +602,8 @@ export const PlayerModal: React.FC<PlayerModalProps> = ({
             src={currentEmbedUrl}
             title={title}
             className="w-full h-full border-0 absolute inset-0 z-10"
-            allow="autoplay; encrypted-media; picture-in-picture; accelerometer; gyroscope; clipboard-write; web-share"
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture; accelerometer; gyroscope; clipboard-write; web-share"
+            allowFullScreen
             // sandbox is intentionally applied later via ref after 6 seconds
             // so the stream loads immediately.
             scrolling="no"
