@@ -1,0 +1,346 @@
+import { StreamingProvider, ServerOption, MediaType } from '../types';
+
+export const TMDB_API_KEY = '74a6132d309245d487e3b93904335056';
+export const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
+export const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p';
+
+// High quality official network and studio brand logos
+export const STREAMING_PROVIDERS: StreamingProvider[] = [
+  {
+    id: 'netflix',
+    name: 'Netflix',
+    badgeColor: '#E50914',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg',
+    networkId: 213,
+    providerId: 8,
+  },
+  {
+    id: 'hulu',
+    name: 'Hulu',
+    badgeColor: '#1CE783',
+    logoSvg: 'https://logodownload.org/wp-content/uploads/2019/09/hulu-logo-4.png',
+    networkId: 453,
+    providerId: 15,
+    invertOnDark: false,
+    lightBg: false,
+  },
+  {
+    id: 'peacock',
+    name: 'Peacock',
+    badgeColor: '#00A8E1',
+    logoSvg: 'https://logodownload.org/wp-content/uploads/2022/12/peacock-logo-white.png',
+    networkId: 3353,
+    providerId: 386,
+    invertOnDark: false,
+    lightBg: false,
+  },
+  {
+    id: 'paramount',
+    name: 'Paramount+',
+    badgeColor: '#0064FF',
+    logoSvg: 'https://image.tmdb.org/t/p/w500/fi83B1oztoS47xxcemFdPMhIzK.png',
+    networkId: 4330,
+    providerId: 531,
+    invertOnDark: false,
+  },
+  {
+    id: 'crunchyroll',
+    name: 'Crunchyroll',
+    badgeColor: '#F47521',
+    logoSvg: 'https://i.logos-download.com/90280/21794-ff7829e4643951d3f9785d0b171a01bb.png/Crunchyroll_Logo_2024.png?dl',
+    networkId: 1112,
+    providerId: 283,
+    invertOnDark: false,
+  },
+  {
+    id: 'appletv',
+    name: 'Apple TV+',
+    badgeColor: '#FFFFFF',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg',
+    networkId: 2552,
+    providerId: 350,
+    invertOnDark: false,
+  },
+  {
+    id: 'disney',
+    name: 'Disney+',
+    badgeColor: '#113CCF',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg',
+    networkId: 2739,
+    providerId: 337,
+  },
+  {
+    id: 'max',
+    name: 'Max (HBO)',
+    badgeColor: '#002BE7',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg',
+    networkId: 3186,
+    providerId: 1899,
+  },
+  {
+    id: 'prime',
+    name: 'Prime Video',
+    badgeColor: '#00A8E1',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg',
+    networkId: 1024,
+    providerId: 9,
+    invertOnDark: false,
+  },
+  {
+    id: 'marvel',
+    name: 'Marvel Studios',
+    badgeColor: '#ED1D24',
+    logoSvg: 'https://image.tmdb.org/t/p/w500/hUzeosd33nzE5MCNsZxCGEKTXaQ.png',
+    companyId: 420,
+    invertOnDark: false,
+    lightBg: false,
+  },
+  {
+    id: 'warnerbros',
+    name: 'Warner Bros.',
+    badgeColor: '#003087',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/6/64/Warner_Bros_logo.svg',
+    companyId: 174,
+  },
+  {
+    id: 'universal',
+    name: 'Universal Pictures',
+    badgeColor: '#000000',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/e/e0/Universal_Pictures_logo.svg',
+    companyId: 33,
+    invertOnDark: false,
+  },
+  {
+    id: 'sony',
+    name: 'Sony Pictures',
+    badgeColor: '#000000',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/a/a2/Sony_Pictures_logo.svg',
+    companyId: 34,
+    invertOnDark: false,
+  },
+  {
+    id: 'a24',
+    name: 'A24',
+    badgeColor: '#000000',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/7/7b/A24_logo.svg',
+    companyId: 41077,
+    invertOnDark: false,
+  },
+  {
+    id: 'starz',
+    name: 'Starz',
+    badgeColor: '#000000',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/6/60/Starz_2022.svg',
+    networkId: 318,
+    providerId: 43,
+    invertOnDark: false,
+  },
+  {
+    id: 'showtime',
+    name: 'Showtime',
+    badgeColor: '#FF0000',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Showtime.svg',
+    networkId: 67,
+    providerId: 37,
+    invertOnDark: false,
+  },
+  {
+    id: 'amc',
+    name: 'AMC',
+    badgeColor: '#000000',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/1/1d/AMC_Logo.svg',
+    networkId: 174,
+    invertOnDark: false,
+  },
+  {
+    id: 'fx',
+    name: 'FX',
+    badgeColor: '#000000',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/8/87/FX_Network_logo.svg',
+    networkId: 88,
+    invertOnDark: false,
+  },
+  {
+    id: 'pixar',
+    name: 'Pixar',
+    badgeColor: '#000000',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Pixar_logo.svg',
+    companyId: 3,
+    invertOnDark: false,
+  },
+  {
+    id: 'tubi',
+    name: 'Tubi',
+    badgeColor: '#F35216',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Tubi_logo_2024_purple.svg',
+    providerId: 73,
+    invertOnDark: false,
+  },
+  {
+    id: 'pluto',
+    name: 'Pluto TV',
+    badgeColor: '#FFDF00',
+    logoSvg: 'https://upload.wikimedia.org/wikipedia/commons/8/8f/Pluto_TV_2020_logo.png',
+    providerId: 300,
+    invertOnDark: false,
+  },
+  {
+    id: 'mgm',
+    name: 'MGM+',
+    badgeColor: '#D3A354',
+    logoSvg: 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/e5bcded6-f42a-4503-afd4-692db216e412/df2elgo-7f53d44f-4d9e-4847-823c-f5d5f27fdba5.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9lNWJjZGVkNi1mNDJhLTQ1MDMtYWZkNC02OTJkYjIxNmU0MTIvZGYyZWxnby03ZjUzZDQ0Zi00ZDllLTQ4NDctODIzYy1mNWQ1ZjI3ZmRiYTUucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Nan2MTO_RwyvVbojV_Gw36QOQKzXr4Pe4vyWBMdcDCY',
+    providerId: 582,
+    invertOnDark: false,
+  }
+];
+
+// Stream servers list
+export const STREAM_SERVERS: ServerOption[] = [
+  {
+    id: 'vidplays',
+    name: 'VidPlays',
+    badge: 'Popular',
+    quality: '1080p HD',
+    speed: 'Fast',
+    supportsTv: true,
+    getUrl: (id, type, s = 1, e = 1) =>
+      type === 'movie'
+        ? `https://vidsrc.to/embed/movie/${id}`
+        : `https://vidsrc.to/embed/tv/${id}/${s}/${e}`,
+  },
+  {
+    id: 'xps',
+    name: 'XPass',
+    badge: 'Reliable',
+    quality: '1080p HD',
+    speed: 'Fast',
+    supportsTv: true,
+    getUrl: (id, type, s = 1, e = 1) =>
+      type === 'movie'
+        ? `https://play.xpass.top/e/movie/${id}?autostart=false`
+        : `https://play.xpass.top/e/tv/${id}/${s}/${e}?autostart=false`,
+  },
+  {
+    id: 'vidlink',
+    name: 'VidLink',
+    badge: 'Fast & Ad-Free',
+    quality: '1080p / 4K',
+    speed: 'Ultra Fast',
+    supportsTv: true,
+    getUrl: (id, type, s = 1, e = 1) =>
+      type === 'movie'
+        ? `https://vidlink.pro/movie/${id}`
+        : `https://vidlink.pro/tv/${id}/${s}/${e}`,
+  },
+  {
+    id: 'zxcstream',
+    name: 'ZXCStream',
+    badge: 'Auto-Full',
+    quality: '1080p HD',
+    speed: 'Ultra Fast',
+    supportsTv: true,
+    getUrl: (id, type, s = 1, e = 1) =>
+      type === 'movie'
+        ? `https://zxcstream.xyz/player/movie/${id}`
+        : `https://zxcstream.xyz/player/tv/${id}/${s}/${e}`,
+  },
+  {
+    id: 'vidsrc',
+    name: 'VidSrc',
+    badge: 'Popular',
+    quality: '1080p',
+    speed: 'Fast',
+    supportsTv: true,
+    getUrl: (id, type, s = 1, e = 1) =>
+      type === 'movie'
+        ? `https://vidsrc.pm/embed/movie?tmdb=${id}`
+        : `https://vidsrc.pm/embed/tv?tmdb=${id}&season=${s}&episode=${e}`,
+  },
+  {
+    id: 'videasy',
+    name: 'VidEasy',
+    badge: 'Ultra Fast',
+    quality: '1080p HD',
+    speed: 'Ultra Fast',
+    supportsTv: true,
+    getUrl: (id, type, s = 1, e = 1) =>
+      type === 'movie'
+        ? `https://player.videasy.net/movie/${id}`
+        : `https://player.videasy.net/tv/${id}/${s}/${e}`,
+  },
+];
+
+// In-memory certification cache to prevent redundant TMDB API calls
+const certificationCache: Record<string, string> = {};
+
+export async function fetchTMDB(endpoint: string, params: Record<string, string> = {}) {
+  const query = new URLSearchParams({
+    api_key: TMDB_API_KEY,
+    language: 'en-US',
+    ...params,
+  }).toString();
+
+  const separator = endpoint.includes('?') ? '&' : '?';
+  const url = `${TMDB_BASE_URL}${endpoint}${separator}${query}`;
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) {
+      throw new Error(`TMDB error ${res.status}`);
+    }
+    return await res.json();
+  } catch (error) {
+    console.error('TMDB Fetch Error:', error);
+    throw error;
+  }
+}
+
+// Helper to fetch Content Rating / Certification (PG-13, TV-MA, R, etc.)
+export async function getCertification(id: number, type: MediaType): Promise<string> {
+  const cacheKey = `${type}-${id}`;
+  if (certificationCache[cacheKey]) {
+    return certificationCache[cacheKey];
+  }
+
+  try {
+    if (type === 'movie') {
+      const data = await fetchTMDB(`/movie/${id}/release_dates`);
+      const usRelease = data.results?.find((r: { iso_3166_1: string }) => r.iso_3166_1 === 'US');
+      if (usRelease?.release_dates) {
+        for (const rd of usRelease.release_dates) {
+          if (rd.certification && rd.certification.trim() !== '') {
+            certificationCache[cacheKey] = rd.certification;
+            return rd.certification;
+          }
+        }
+      }
+      // fallback to any certification found
+      for (const r of data.results || []) {
+        for (const rd of r.release_dates || []) {
+          if (rd.certification) {
+            certificationCache[cacheKey] = rd.certification;
+            return rd.certification;
+          }
+        }
+      }
+    } else {
+      const data = await fetchTMDB(`/tv/${id}/content_ratings`);
+      const usRating = data.results?.find((r: { iso_3166_1: string }) => r.iso_3166_1 === 'US');
+      if (usRating?.rating) {
+        certificationCache[cacheKey] = usRating.rating;
+        return usRating.rating;
+      }
+      if (data.results && data.results.length > 0 && data.results[0].rating) {
+        certificationCache[cacheKey] = data.results[0].rating;
+        return data.results[0].rating;
+      }
+    }
+  } catch {
+    // default rating fallback based on deterministic algorithm if network fails
+  }
+
+  const defaultRating = type === 'movie' ? 'PG-13' : 'TV-MA';
+  certificationCache[cacheKey] = defaultRating;
+  return defaultRating;
+             }
+                                                          
