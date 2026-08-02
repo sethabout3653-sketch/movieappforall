@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Star, Info, Film, Tv, Bookmark, Check, Calendar } from 'lucide-react';
+import { Play, Star, Info, Film, Tv, Bookmark, Check, Calendar, X } from 'lucide-react';
 import { motion } from 'motion/react';
 import { MediaItem, MediaType } from '../types';
 import { getCertification } from '../services/tmdb';
@@ -173,12 +173,12 @@ export const MovieCard: React.FC<MovieCardProps> = ({
                 }}
                 className={`p-1 rounded-full transition-colors ${
                   isSaved
-                    ? 'text-white bg-white/20'
+                    ? 'text-red-400 bg-red-400/10 hover:bg-red-400/20 hover:text-red-300'
                     : 'text-zinc-400 hover:text-white hover:bg-white/10'
                 }`}
-                title={isSaved ? 'Remove from Watchlist' : 'Add to Watchlist'}
+                title={isSaved ? 'Remove from My Stuff' : 'Add to My Stuff'}
               >
-                {isSaved ? <Check className="w-3.5 h-3.5" /> : <Bookmark className="w-3.5 h-3.5" />}
+                {isSaved ? <X className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
               </button>
             )}
             {onMoreInfo && (

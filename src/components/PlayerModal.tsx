@@ -584,7 +584,7 @@ export const PlayerModal: React.FC<PlayerModalProps> = ({
                 e.stopPropagation();
                 toggleFullscreen();
               }}
-              className="absolute bottom-[4px] right-[12px] w-[44px] h-[44px] z-30 cursor-pointer bg-transparent"
+              className="absolute bottom-0 right-0 w-[80px] h-[70px] z-30 cursor-pointer bg-transparent"
               title="Toggle Fullscreen"
             />
           )}
