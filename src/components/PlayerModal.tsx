@@ -77,7 +77,8 @@ export const PlayerModal: React.FC<PlayerModalProps> = ({
 
   const toggleFullscreen = () => {
     if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch((err) => {
+      const target = containerRef.current || document.documentElement;
+      target.requestFullscreen().catch((err) => {
         console.error(`Error attempting to enable full-screen mode: ${err.message}`);
       });
     } else {
@@ -583,7 +584,7 @@ export const PlayerModal: React.FC<PlayerModalProps> = ({
                 e.stopPropagation();
                 toggleFullscreen();
               }}
-              className="absolute bottom-0 right-0 w-16 h-14 z-30 cursor-pointer bg-transparent"
+              className="absolute bottom-[4px] right-[12px] w-[44px] h-[44px] z-30 cursor-pointer bg-transparent"
               title="Toggle Fullscreen"
             />
           )}
